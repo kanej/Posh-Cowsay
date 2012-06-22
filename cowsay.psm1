@@ -35,11 +35,10 @@ function print-messagebubble($message) {
     Write-Host " ".padRight($bubbleWidth + 3, '-')
   } else {
     $first = $lines[0]
-    $second = $lines[1]
     $last = $lines[$lines.length - 1]
     Write-Host " ".padRight($bubbleWidth + 3, '-')
     Write-Host "/ $first \"
-    Write-Host "| $second |"
+    1..($lines.length - 2) | foreach { Write-Host "|" $lines[$_] "|" }
     Write-Host "\ $last /"
     Write-Host " ".padRight($bubbleWidth + 3, '-')
   }
@@ -47,11 +46,11 @@ function print-messagebubble($message) {
 
 function cowsay($message) {
   print-messagebubble($message) 
-  Write-Host "      \  ^__^"
-  Write-Host "       \ (00)\________"
+  Write-Host "      \  ^__^             "
+  Write-Host "       \ (00)\________    "
   Write-Host "         (__)\        )\/\"
-  Write-Host "              ||----w |"
-  Write-Host "              ||     ||"
+  Write-Host "              ||----w |   "
+  Write-Host "              ||     ||   "
 }
 
 Export-ModuleMember cowsay
