@@ -44,13 +44,17 @@ function print-messagebubble($message) {
   }
 }
 
-function cowsay($message) {
-  print-messagebubble($message) 
+function print-cow() {
   Write-Host "      \  ^__^             "
   Write-Host "       \ (00)\________    "
   Write-Host "         (__)\        )\/\"
   Write-Host "              ||----w |   "
   Write-Host "              ||     ||   "
+}
+
+function cowsay($message) {
+  print-messagebubble($message) 
+  print-cow
 }
 
 Export-ModuleMember cowsay
