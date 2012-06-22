@@ -14,6 +14,15 @@ function print-messagebubble($message) {
     Write-Host "/ $first \"
     Write-Host "\ $second /"
     Write-Host " ".padRight($bubbleWidth + 3, '-')
+  } elseif($message.length -lt (3 * $bubbleWidth) + 1) {
+    $first = $message.substring(0, $bubbleWidth)
+    $second =$message.substring($bubbleWidth, $bubbleWidth)
+    $third = $message.substring(2 * $bubbleWidth).padRight($bubbleWidth, ' ')
+    Write-Host " ".padRight($bubbleWidth + 3, '-')
+    Write-Host "/ $first \"
+    Write-Host "| $second |"
+    Write-Host "\ $third /"
+    Write-Host " ".padRight($bubbleWidth + 3, '-')
   } else {
     throw "The cow is dead I am afraid."
   }
