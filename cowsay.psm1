@@ -32,7 +32,9 @@ function print-messagebubble($message) {
     Write-Output " ".padRight($bubbleWidth + 3, '-')
     Write-Output "/ $first \"
     if($lines.length -gt 2) {
-      1..($lines.length - 2) | foreach { $newline = "| " + $lines[$_] + " |"; Write-Output $newline }
+      1..($lines.length - 2) | foreach {
+        $newline = "| " + $lines[$_] + " |"; Write-Output $newline
+      }
     }
     Write-Output "\ $last /"
     Write-Output " ".padRight($bubbleWidth + 3, '-')
