@@ -26,19 +26,14 @@ function print-messagebubble($message) {
     Write-Output " ".padRight($line.length + 3, '-')
     Write-Output "< $line >"
     Write-Output " ".padRight($line.length + 3, '-')
-  } elseif($lines.length -eq 2) {
-    $first = $lines[0] 
-    $second = $lines[1]
-    Write-Output " ".padRight($bubbleWidth + 3, '-')
-    Write-Output "/ $first \"
-    Write-Output "\ $second /"
-    Write-Output " ".padRight($bubbleWidth + 3, '-')
   } else {
     $first = $lines[0]
     $last = $lines[$lines.length - 1]
     Write-Output " ".padRight($bubbleWidth + 3, '-')
     Write-Output "/ $first \"
-    1..($lines.length - 2) | foreach { $newline = "| " + $lines[$_] + " |"; Write-Output $newline }
+    if($lines.length -gt 2) {
+      1..($lines.length - 2) | foreach { $newline = "| " + $lines[$_] + " |"; Write-Output $newline }
+    }
     Write-Output "\ $last /"
     Write-Output " ".padRight($bubbleWidth + 3, '-')
   }
