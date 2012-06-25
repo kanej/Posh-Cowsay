@@ -3,6 +3,10 @@
 $bubbleWidth = 40
 
 function convert-message-to-lines($message) {
+  # Trim whitespace so that only one space is between each word
+  $words = $message.split(" ") | where { $_ -ne "" }
+  $message = $words -join " "
+
   $lines = @()
   $numberOfLines = [Math]::Ceiling($message.length / $bubbleWidth)
   
