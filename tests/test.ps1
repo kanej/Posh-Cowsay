@@ -3,16 +3,20 @@ Import-Module -force .\cowsay.psm1
 function main() {
   New-TempDir
 
-  run-alltests
+  if($args[0] -ne $null) {
+    Run-Test $args[0]
+  } else {
+    Run-AllTests
+  }
 
   Remove-TempDir
 }
 
-function run-alltests() {
-  ls .\tests\*.in | foreach { run-test $_.BaseName }
+function Run-AllTests() {
+  ls .\tests\*.in | foreach { Run-Test $_.BaseName }
 }
 
-function run-test($test) {
+function Run-Test($test) {
   $message = Get-Content .\tests\$test.in
   cowsay $message > tmp\$test.tmp
   $result = Compare-Object (Get-Content .\tests\$test.out) (Get-Content .\tmp\$test.tmp)
@@ -20,6 +24,7 @@ function run-test($test) {
     Write-TestPassed $test
   } else {
     Write-TestFailed $test
+    cowsay $message
     $result
   }
 }
@@ -53,4 +58,4 @@ function Write-ColouredOutput($text, $colour) {
 }
 
 # Run the main function now everything is defined.
-main
+main $args

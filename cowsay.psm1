@@ -2,25 +2,69 @@
 # Max Width of the Speech Bubble
 $bubbleWidth = 40
 
-function convert-message-to-lines($message) {
-  # Trim whitespace so that only one space is between each word
-  $words = $message.split(" ") | where { $_ -ne "" }
-  $message = $words -join " "
-
-  $lines = @()
-  $numberOfLines = [Math]::Ceiling($message.length / $bubbleWidth)
-  
-  if($numberOfLines -eq 1) {
-    $lines += $message
-    return ,$lines
+function split-word($word) {
+  if($word.length -le $bubbleWidth) {
+    return ,@($word)
   }
-  
-  # Get all lines but last
-  0..($numberOfLines - 2) | foreach { $lines += $message.substring(($_ * $bubbleWidth), 40) } 
-  # Append last line
-  $lines += $message.substring(($numberOfLines - 1) * $bubbleWidth).padRight($bubbleWidth) 
 
-  return $lines
+  $splits = @()
+
+  foreach($i in (0..($word.length / $bubbleWidth))) {
+    $startPoint = ($i * $bubbleWidth)
+    if(($startPoint + $bubbleWidth) -gt $word.length) {
+      $splits += $word.substring($startPoint)
+    } else {
+      $splits += $word.substring($startPoint, $bubbleWidth)
+    }
+  }
+
+  return ,$splits
+}
+
+function split-message($message) {
+  $wordsSplitOnSpaces = $message.split(" ")
+  
+  $words = @()
+
+  foreach($longWord in $wordsSplitOnSpaces) {
+    foreach($word in split-word($longWord)) {
+      if($word -ne "") {
+        $words += ,$word
+      }
+    }
+  }
+
+  return ,$words
+}
+
+function convert-message-to-lines($message) {
+  $words = split-message $message  
+  $lines = @()
+  $line = ""
+
+  foreach($word in $words) {
+    if(($line.length + $word.length + 1) -gt $bubbleWidth) {
+      if($line -ne "") {
+        $lines += ,$line
+      }
+      $line = $word 
+    } else {
+      if($line -eq "") {
+        $line = $word
+      } else {
+        $line += " " + $word
+      }
+    }
+  }
+
+  $lastLine = $line
+
+  if($lines.length -ne 0) {
+    $lastLine =  ($line.padRight($bubbleWidth, ' ')) 
+  }
+
+  $lines += ,$lastLine
+  return ,$lines 
 }
 
 function print-messagebubble($message) {
