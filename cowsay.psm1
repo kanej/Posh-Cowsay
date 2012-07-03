@@ -2,70 +2,14 @@
 # Max Width of the Speech Bubble
 $bubbleWidth = 40
 
-function split-word($word) {
-  if($word.length -le $bubbleWidth) {
-    return ,@($word)
-  }
+# Public
 
-  $splits = @()
-
-  foreach($i in (0..($word.length / $bubbleWidth))) {
-    $startPoint = ($i * $bubbleWidth)
-    if(($startPoint + $bubbleWidth) -gt $word.length) {
-      $splits += $word.substring($startPoint)
-    } else {
-      $splits += $word.substring($startPoint, $bubbleWidth)
-    }
-  }
-
-  return ,$splits
+function cowsay($message) {
+  print-messagebubble($message) 
+  print-cow
 }
 
-function split-message($message) {
-  $wordsSplitOnSpaces = $message.split(" ")
-  
-  $words = @()
-
-  foreach($longWord in $wordsSplitOnSpaces) {
-    foreach($word in split-word($longWord)) {
-      if($word -ne "") {
-        $words += ,$word
-      }
-    }
-  }
-
-  return ,$words
-}
-
-function convert-message-to-lines($message) {
-  $words = split-message $message  
-  $lines = @()
-  $line = ""
-
-  foreach($word in $words) {
-    if(($line.length + $word.length + 1) -gt $bubbleWidth) {
-      if($line -ne "") {
-        $lines += ,$line
-      }
-      $line = $word 
-    } else {
-      if($line -eq "") {
-        $line = $word
-      } else {
-        $line += " " + $word
-      }
-    }
-  }
-
-  $lastLine = $line
-
-  if($lines.length -ne 0) {
-    $lastLine =  ($line.padRight($bubbleWidth, ' ')) 
-  }
-
-  $lines += ,$lastLine
-  return ,$lines 
-}
+# Private
 
 function print-messagebubble($message) {
   $lines = convert-message-to-lines($message)
@@ -97,9 +41,73 @@ function print-cow() {
   Write-Output "              ||     ||   "
 }
 
-function cowsay($message) {
-  print-messagebubble($message) 
-  print-cow
+# Helper Functions
+
+function convert-message-to-lines($message) {
+  $words = split-message $message  
+  $lines = @()
+  $line = ""
+
+  foreach($word in $words) {
+    if(($line.length + $word.length + 1) -gt $bubbleWidth) {
+      if($line -ne "") {
+        $lines += ,$line
+      }
+      $line = $word 
+    } else {
+      if($line -eq "") {
+        $line = $word
+      } else {
+        $line += " " + $word
+      }
+    }
+  }
+
+  $lastLine = $line
+
+  if($lines.length -ne 0) {
+    $lastLine =  ($line.padRight($bubbleWidth, ' ')) 
+  }
+
+  $lines += ,$lastLine
+  return ,$lines 
 }
+
+function split-message($message) {
+  $wordsSplitOnSpaces = $message.split(" ")
+  
+  $words = @()
+
+  foreach($longWord in $wordsSplitOnSpaces) {
+    foreach($word in split-word($longWord)) {
+      if($word -ne "") {
+        $words += ,$word
+      }
+    }
+  }
+
+  return ,$words
+}
+
+function split-word($word) {
+  if($word.length -le $bubbleWidth) {
+    return ,@($word)
+  }
+
+  $splits = @()
+
+  foreach($i in (0..($word.length / $bubbleWidth))) {
+    $startPoint = ($i * $bubbleWidth)
+    if(($startPoint + $bubbleWidth) -gt $word.length) {
+      $splits += $word.substring($startPoint)
+    } else {
+      $splits += $word.substring($startPoint, $bubbleWidth)
+    }
+  }
+
+  return ,$splits
+}
+
+# Exports
 
 Export-ModuleMember cowsay
