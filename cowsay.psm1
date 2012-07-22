@@ -14,29 +14,49 @@ function cowsay($message) {
 function print-messagebubble($message) {
   $lines = convert-message-to-lines($message)
   $lineWidth = max-width($lines)
+
+  Write-MessageBubbleBoundaryLine $lineWidth
+
   if($lines.length -eq 1) {
-    $line = $lines[0]
-    Write-Output " ".padRight($line.length + 3, '-')
-    Write-Output "< $line >"
-    Write-Output " ".padRight($line.length + 3, '-')
+    $delimiters = Determine-MessageBubbleDelimiters $_ $lines.length
+    Write-MessageBubbleLine -lineWidth $lineWidth -delimiters $delimiters -text (' ' + $lines[0] + ' ')
   } else {
-    $first = $lines[0]
-    $last = $lines[$lines.length - 1]
-    Write-Output " ".padRight($lineWidth + 3, '-')
-    Write-MessageBubbleLine -lineWidth $lineWidth -leftDelimiter '/' -text (' ' + $first + ' ') -rightDelimiter '\'
-    if($lines.length -gt 2) {
-      1..($lines.length - 2) | foreach {
-        Write-MessageBubbleLine -lineWidth $lineWidth -leftDelimiter '|' -text (' ' + $lines[$_] + ' ') -rightDelimiter '|'
-      }
+    0..($lines.length - 1) | foreach {
+      $delimiters = Determine-MessageBubbleDelimiters $_ $lines.length
+      Write-MessageBubbleLine -lineWidth $lineWidth -delimiters $delimiters -text (' ' + $lines[$_] + ' ')
     }
-    Write-MessageBubbleLine -lineWidth $lineWidth -leftDelimiter '\' -text (' ' + $last + ' ') -rightDelimiter '/'
-    Write-Output " ".padRight($lineWidth + 3, '-')
   }
+
+  Write-MessageBubbleBoundaryLine $lineWidth
 }
 
-function Write-MessageBubbleLine($lineWidth, $leftDelimiter, $text, $rightDelimiter) {
-    $line = $leftDelimiter + ($text.padRight($lineWidth + 2, ' ')) + $rightDelimiter
-    Write-Output $line
+function Determine-MessageBubbleDelimiters($lineNumber, $totalNumberOfLines) {
+  # single line
+  if($totalNumberOfLines -eq 1) {
+    return '<>'
+  }
+
+  # first line
+  if($lineNumber -eq 0) {
+    return '/\'
+  }
+
+  # last line
+  if($lineNumber -eq ($totalNumberOfLines -1)) {
+    return '\/'
+  }
+
+  # middle line
+  return '||'
+}
+
+function Write-MessageBubbleLine($lineWidth, $delimiters, $text) {
+    $line = $delimiters[0] + ($text.padRight($lineWidth + 2, ' ')) + $delimiters[1]
+    Write-Output $line.trimEnd()
+}
+
+function Write-MessageBubbleBoundaryLine($lineWidth) {
+  Write-MessageBubbleLine -lineWidth $lineWidth -delimiters '  ' -text ("".padRight($lineWidth + 2, '-'))
 }
 
 function print-cow() {
