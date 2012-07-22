@@ -30,16 +30,16 @@ $bubbleWidth = 40
                 ||     ||
 
 #>
-function cowsay($message) {
-  print-messagebubble($message) 
-  print-cow
+function Cowsay($message) {
+  Print-MessageBubble($message) 
+  Print-Cow
 }
 
 # Private
 
-function print-messagebubble($message) {
-  $lines = convert-message-to-lines($message)
-  $lineWidth = max-width($lines)
+function Print-MessageBubble($message) {
+  $lines = Convert-MessageToLines($message)
+  $lineWidth = Max-Width($lines)
 
   Write-MessageBubbleBoundaryLine $lineWidth
 
@@ -52,7 +52,7 @@ function print-messagebubble($message) {
   Write-MessageBubbleBoundaryLine $lineWidth
 }
 
-function print-cow() {
+function Print-Cow() {
   Write-Output "      \  ^__^             "
   Write-Output "       \ (00)\________    "
   Write-Output "         (__)\        )\/\"
@@ -62,8 +62,8 @@ function print-cow() {
 
 # Helper Functions
 
-function convert-message-to-lines($message) {
-  $words = split-message $message  
+function Convert-MessageToLines($message) {
+  $words = Split-Message $message  
   $lines = @()
   $line = ""
 
@@ -88,13 +88,13 @@ function convert-message-to-lines($message) {
   return ,$lines 
 }
 
-function split-message($message) {
+function Split-Message($message) {
   $wordsSplitOnSpaces = $message.split(" ")
   
   $words = @()
 
   foreach($longWord in $wordsSplitOnSpaces) {
-    foreach($word in split-word($longWord)) {
+    foreach($word in Split-Word($longWord)) {
       if($word -ne "") {
         $words += ,$word
       }
@@ -104,7 +104,7 @@ function split-message($message) {
   return ,$words
 }
 
-function split-word($word) {
+function Split-Word($word) {
   if($word.length -le $bubbleWidth) {
     return ,@($word)
   }
@@ -123,7 +123,7 @@ function split-word($word) {
   return ,$splits
 }
 
-function max-width($lines) {
+function Max-Width($lines) {
   $maxLength = 0
   foreach($line in $lines) {
     if($line.length -gt $maxLength) {
@@ -134,15 +134,15 @@ function max-width($lines) {
   return $maxLength
 }
 
-function Write-MessageBubbleLine($lineWidth, $delimiters, $text) {
-    $line = $delimiters[0] + ($text.padRight($lineWidth + 2, ' ')) + $delimiters[1]
-    Write-Output $line.trimEnd()
-}
-
 function Write-MessageBubbleBoundaryLine($lineWidth) {
   Write-MessageBubbleLine -lineWidth $lineWidth `
                           -delimiters '  ' `
                           -text ("".padRight($lineWidth + 2, '-'))
+}
+
+function Write-MessageBubbleLine($lineWidth, $delimiters, $text) {
+    $line = $delimiters[0] + ($text.padRight($lineWidth + 2, ' ')) + $delimiters[1]
+    Write-Output $line.trimEnd()
 }
 
 function Determine-MessageBubbleDelimiters($lineNumber, $totalNumberOfLines) {
@@ -167,4 +167,4 @@ function Determine-MessageBubbleDelimiters($lineNumber, $totalNumberOfLines) {
 
 # Exports
 
-Export-ModuleMember cowsay
+Export-ModuleMember Cowsay
