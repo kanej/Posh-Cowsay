@@ -17,46 +17,13 @@ function print-messagebubble($message) {
 
   Write-MessageBubbleBoundaryLine $lineWidth
 
-  if($lines.length -eq 1) {
-    $delimiters = Determine-MessageBubbleDelimiters $_ $lines.length
-    Write-MessageBubbleLine -lineWidth $lineWidth -delimiters $delimiters -text (' ' + $lines[0] + ' ')
-  } else {
-    0..($lines.length - 1) | foreach {
-      $delimiters = Determine-MessageBubbleDelimiters $_ $lines.length
-      Write-MessageBubbleLine -lineWidth $lineWidth -delimiters $delimiters -text (' ' + $lines[$_] + ' ')
-    }
+  foreach ($index in 0..($lines.length - 1)) {
+    $delimiters = Determine-MessageBubbleDelimiters $index $lines.length
+    $paddedLine = ' ' + $lines[$index] + ' '
+    Write-MessageBubbleLine -lineWidth $lineWidth -delimiters $delimiters -text $paddedLine
   }
 
   Write-MessageBubbleBoundaryLine $lineWidth
-}
-
-function Determine-MessageBubbleDelimiters($lineNumber, $totalNumberOfLines) {
-  # single line
-  if($totalNumberOfLines -eq 1) {
-    return '<>'
-  }
-
-  # first line
-  if($lineNumber -eq 0) {
-    return '/\'
-  }
-
-  # last line
-  if($lineNumber -eq ($totalNumberOfLines -1)) {
-    return '\/'
-  }
-
-  # middle line
-  return '||'
-}
-
-function Write-MessageBubbleLine($lineWidth, $delimiters, $text) {
-    $line = $delimiters[0] + ($text.padRight($lineWidth + 2, ' ')) + $delimiters[1]
-    Write-Output $line.trimEnd()
-}
-
-function Write-MessageBubbleBoundaryLine($lineWidth) {
-  Write-MessageBubbleLine -lineWidth $lineWidth -delimiters '  ' -text ("".padRight($lineWidth + 2, '-'))
 }
 
 function print-cow() {
@@ -139,6 +106,37 @@ function max-width($lines) {
   }
   
   return $maxLength
+}
+
+function Write-MessageBubbleLine($lineWidth, $delimiters, $text) {
+    $line = $delimiters[0] + ($text.padRight($lineWidth + 2, ' ')) + $delimiters[1]
+    Write-Output $line.trimEnd()
+}
+
+function Write-MessageBubbleBoundaryLine($lineWidth) {
+  Write-MessageBubbleLine -lineWidth $lineWidth `
+                          -delimiters '  ' `
+                          -text ("".padRight($lineWidth + 2, '-'))
+}
+
+function Determine-MessageBubbleDelimiters($lineNumber, $totalNumberOfLines) {
+  # single line
+  if($totalNumberOfLines -eq 1) {
+    return '<>'
+  }
+
+  # first line
+  if($lineNumber -eq 0) {
+    return '/\'
+  }
+
+  # last line
+  if($lineNumber -eq ($totalNumberOfLines -1)) {
+    return '\/'
+  }
+
+  # middle line
+  return '||'
 }
 
 # Exports
