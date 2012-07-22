@@ -30,7 +30,8 @@ $bubbleWidth = 40
                 ||     ||
 
 #>
-function Cowsay($message) {
+function Cowsay() {
+  $message = [String]::join(" ", $args)
   Print-MessageBubble($message) 
   Print-Cow
 }
