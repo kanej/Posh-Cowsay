@@ -13,6 +13,7 @@ function cowsay($message) {
 
 function print-messagebubble($message) {
   $lines = convert-message-to-lines($message)
+  $lineWidth = max-width($lines)
   if($lines.length -eq 1) {
     $line = $lines[0]
     Write-Output " ".padRight($line.length + 3, '-')
@@ -21,16 +22,21 @@ function print-messagebubble($message) {
   } else {
     $first = $lines[0]
     $last = $lines[$lines.length - 1]
-    Write-Output " ".padRight($bubbleWidth + 3, '-')
-    Write-Output "/ $first \"
+    Write-Output " ".padRight($lineWidth + 3, '-')
+    Write-MessageBubbleLine -lineWidth $lineWidth -leftDelimiter '/' -text (' ' + $first + ' ') -rightDelimiter '\'
     if($lines.length -gt 2) {
       1..($lines.length - 2) | foreach {
-        $newline = "| " + $lines[$_] + " |"; Write-Output $newline
+        Write-MessageBubbleLine -lineWidth $lineWidth -leftDelimiter '|' -text (' ' + $lines[$_] + ' ') -rightDelimiter '|'
       }
     }
-    Write-Output "\ $last /"
-    Write-Output " ".padRight($bubbleWidth + 3, '-')
+    Write-MessageBubbleLine -lineWidth $lineWidth -leftDelimiter '\' -text (' ' + $last + ' ') -rightDelimiter '/'
+    Write-Output " ".padRight($lineWidth + 3, '-')
   }
+}
+
+function Write-MessageBubbleLine($lineWidth, $leftDelimiter, $text, $rightDelimiter) {
+    $line = $leftDelimiter + ($text.padRight($lineWidth + 2, ' ')) + $rightDelimiter
+    Write-Output $line
 }
 
 function print-cow() {
@@ -64,10 +70,6 @@ function convert-message-to-lines($message) {
   }
 
   $lastLine = $line
-
-  if($lines.length -ne 0) {
-    $lastLine =  ($line.padRight($bubbleWidth, ' ')) 
-  }
 
   $lines += ,$lastLine
   return ,$lines 
@@ -106,6 +108,17 @@ function split-word($word) {
   }
 
   return ,$splits
+}
+
+function max-width($lines) {
+  $maxLength = 0
+  foreach($line in $lines) {
+    if($line.length -gt $maxLength) {
+      $maxLength = $line.length
+    }
+  }
+  
+  return $maxLength
 }
 
 # Exports
