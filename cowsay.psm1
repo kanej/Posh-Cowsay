@@ -4,6 +4,32 @@ $bubbleWidth = 40
 
 # Public
 
+<# 
+.Synopsis
+  Prints text to the screen as if a cow had said it.
+.Description
+  Given a text message a picture of a cow speaking the text
+  is pretty printed to the screen.
+.Link
+  http://github.com/kanej/posh-cowsay
+
+.Example
+  # cowsay moo
+
+  Description
+  -----------
+  Prints out:
+
+   -----
+  < moo >
+   -----
+        \  ^__^
+         \ (00)\________
+           (__)\        )\/\
+                ||----w |
+                ||     ||
+
+#>
 function cowsay($message) {
   print-messagebubble($message) 
   print-cow
