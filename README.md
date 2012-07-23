@@ -29,10 +29,11 @@ Install
 =======
 Posh-Cowsay is a single Powershell Module file with no dependencies. To install it:
 
-1. Copy [cowsay.psm1](https://raw.github.com/kanej/posh-cowsay/master/cowsay.psm1) to your modules folder (C:\Users\<UserName\Documents\WindowsPowerShell\Modules> on Windows 7).
+1. Copy [cowsay.psm1](https://raw.github.com/kanej/posh-cowsay/master/cowsay.psm1) to your modules folder (C:\Users\<UserName>\Documents\WindowsPowerShell\Modules> on Windows 7).
+
 2. Open a new Powershell terminal and import the module
 
-    Import-Module cowsay 
+      Import-Module cowsay
 
 3. cowsay That was easy ... ish
 
