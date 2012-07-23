@@ -33,9 +33,15 @@ Posh-Cowsay is a single Powershell Module file with no dependencies. To install 
 
 2. Open a new Powershell terminal and import the module
 
-      Import-Module cowsay
+    > Import-Module cowsay
 
 3. cowsay That was easy ... ish
+
+TODO
+====
+1. Support the modes that the original cowsay supported e.g. XX for the cows eyes.
+2. Support for arbitary whitespace (the -n option in cowsay).
+3. A way of dealing with cow files or an equivalent.
 
 License
 =======
