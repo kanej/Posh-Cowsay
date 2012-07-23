@@ -1,3 +1,17 @@
+#
+#  Posh-Cowsay
+#  PowerShell version of the venerable cowsay unix program.
+#
+#  Copyright (c) 2012 John Kane
+#  https://github.com/kanej/posh-cowsay
+#  
+#  Based on Tony Monroe's cowsay: 
+#  http://www.nog.net/~tony/warez/cowsay-3.03.tar.gz
+#
+#  Licensed under the GNU GPL version 3.0
+#
+
+#requires -Version 2.0
 
 # Posh-Cowsay Version
 $version = "0.1.0"
@@ -9,19 +23,24 @@ $bubbleWidth = 40
 
 <# 
 .Synopsis
-  Prints text to the screen as if a cow had said it.
+  Prints the given text to the console as if a cow had said it.
 .Description
-  Given a text message a picture of a cow speaking the text
-  is pretty printed to the screen.
+  Posh-Cowsay generates an ASCII art picture of a cow saying something
+  provided by the user. It word-wraps the message at about 40
+  columns, and prints the cow saying the given message on standard
+  output.
+
+  The -version or -v option will display the version of Posh-Cowsay.
 .Link
-  http://github.com/kanej/posh-cowsay
+  https://github.com/kanej/posh-cowsay
 
 .Example
-  # cowsay moo
+  cowsay moo
 
   Description
   -----------
-  Prints out:
+  Takes "moo" to be the message and prints the text within a
+  speech bubble, followed by the cow:
 
    _____
   < moo >
@@ -32,6 +51,22 @@ $bubbleWidth = 40
                 ||----w |
                 ||     ||
 
+.Example
+  "moo" | cowsay
+
+  Description
+  -----------
+  The message can be piped in as well, giving the same result:
+
+   _____
+  < moo >
+   -----
+        \  ^__^
+         \ (oo)\________
+           (__)\        )\/\
+                ||----w |
+                ||     ||
+  
 #>
 function Cowsay() {
   $params

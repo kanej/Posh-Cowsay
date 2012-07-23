@@ -1,5 +1,5 @@
-Posh-Cowsay - Cowsay in Powershell
-==================================
+Posh-Cowsay - Cowsay for Windows Powershell
+===========================================
 Clearly a shell cannot be called civilised until it has a talking cow.
 
      _______________________________
@@ -14,6 +14,16 @@ Clearly a shell cannot be called civilised until it has a talking cow.
 Based on Tony Monroe's original Unix terminal program cowsay:
 
 http://www.nog.net/~tony/warez/cowsay-3.03.tar.gz
+
+Usage
+=====
+Posh-Cowsay exposes a single function *cowsay*. Any non-option args passed to cowsay are treated as the message:
+
+    > cowsay The build is broken
+
+For more examples see the built-in powershell help:
+
+    > get-help cowsay -examples
 
 License
 =======
