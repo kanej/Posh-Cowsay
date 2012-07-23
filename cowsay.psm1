@@ -1,4 +1,7 @@
 
+# Posh-Cowsay Version
+$version = "0.1.0"
+
 # Max Width of the Speech Bubble
 $bubbleWidth = 40
 
@@ -32,11 +35,19 @@ $bubbleWidth = 40
 #>
 function Cowsay() {
   $params
+
+  foreach($arg in $args) {
+    if($arg -eq "-v" -or $arg -eq "-version") {
+      Print-Version
+      return
+    }
+  }
+
   $inputList = @($input)
   if ($inputList.Count -eq 0) {
     $params = ,$args
   } else {
-    $params = ,$args + @($inputList)
+    $params = ,$args +@($inputList)
   }
 
   $message = [String]::join(" ", $params)
@@ -67,6 +78,10 @@ function Print-Cow() {
   Write-Output "         (__)\        )\/\"
   Write-Output "              ||----w |   "
   Write-Output "              ||     ||   "
+}
+
+function Print-Version() {
+ Write-Output "Posh-Cowsay version $version" 
 }
 
 # Helper Functions
