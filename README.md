@@ -1,6 +1,6 @@
 Posh-Cowsay - Cowsay for Windows Powershell
 ===========================================
-Clearly a shell cannot be called civilised until it has a talking cow.
+A shell cannot be called civilised until it has a talking cow.
 
      _______________________________
     < For POSH users with Unix envy >
@@ -21,7 +21,7 @@ Posh-Cowsay exposes a single function *cowsay*. Any non-option args passed to co
 
     > cowsay The build is broken
 
-For more examples see the built-in powershell help:
+For more examples see the built-in Powershell help:
 
     > get-help cowsay -examples
 
