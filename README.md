@@ -2,11 +2,11 @@ Posh-Cowsay - Cowsay in Powershell
 ==================================
 Clearly a shell cannot be called civilised until it has a talking cow.
 
-     ---------------------------------------
-    < For all you POSH users with Unix envy >
-     ---------------------------------------
+     _______________________________
+    < For POSH users with Unix envy >
+     -------------------------------
           \  ^__^             
-           \ (00)\________    
+           \ (oo)\________    
              (__)\        )\/\
                   ||----w |   
                   ||     ||   

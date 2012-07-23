@@ -23,11 +23,11 @@ $bubbleWidth = 40
   -----------
   Prints out:
 
-   -----
+   _____
   < moo >
    -----
         \  ^__^
-         \ (00)\________
+         \ (oo)\________
            (__)\        )\/\
                 ||----w |
                 ||     ||
@@ -61,7 +61,7 @@ function Print-MessageBubble($message) {
   $lines = Convert-MessageToLines($message)
   $lineWidth = Max-Width($lines)
 
-  Write-MessageBubbleBoundaryLine $lineWidth
+  Write-MessageBubbleBoundaryLine -lineWidth $lineWidth -boundaryChar '_' 
 
   foreach ($index in 0..($lines.length - 1)) {
     $delimiters = Determine-MessageBubbleDelimiters $index $lines.length
@@ -69,12 +69,12 @@ function Print-MessageBubble($message) {
     Write-MessageBubbleLine -lineWidth $lineWidth -delimiters $delimiters -text $paddedLine
   }
 
-  Write-MessageBubbleBoundaryLine $lineWidth
+  Write-MessageBubbleBoundaryLine -lineWidth $lineWidth -boundaryChar '-'
 }
 
 function Print-Cow() {
   Write-Output "      \  ^__^             "
-  Write-Output "       \ (00)\________    "
+  Write-Output "       \ (oo)\________    "
   Write-Output "         (__)\        )\/\"
   Write-Output "              ||----w |   "
   Write-Output "              ||     ||   "
@@ -158,10 +158,10 @@ function Max-Width($lines) {
   return $maxLength
 }
 
-function Write-MessageBubbleBoundaryLine($lineWidth) {
+function Write-MessageBubbleBoundaryLine($lineWidth, $boundaryChar) {
   Write-MessageBubbleLine -lineWidth $lineWidth `
                           -delimiters '  ' `
-                          -text ("".padRight($lineWidth + 2, '-'))
+                          -text ("".padRight($lineWidth + 2, $boundaryChar))
 }
 
 function Write-MessageBubbleLine($lineWidth, $delimiters, $text) {
