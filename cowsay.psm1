@@ -31,7 +31,15 @@ $bubbleWidth = 40
 
 #>
 function Cowsay() {
-  $message = [String]::join(" ", $args)
+  $params
+  $inputList = @($input)
+  if ($inputList.Count -eq 0) {
+    $params = ,$args
+  } else {
+    $params = ,$args + @($inputList)
+  }
+
+  $message = [String]::join(" ", $params)
   Print-MessageBubble($message) 
   Print-Cow
 }
