@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Posh-cowsay by kanej</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Posh-cowsay</h1>
+        <p class="header">Cowsay for Windows Powershell</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/kanej/posh-cowsay/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/kanej/posh-cowsay/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/kanej/posh-cowsay">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/kanej">kanej</a></p>
+
+
+      </header>
+      <section>
+        <h1>Posh-Cowsay - Cowsay for Windows Powershell</h1>
+
+<p>A shell cannot be called civilised until it has a talking cow.</p>
+
+<pre><code> _______________________________
+&lt; For POSH users with Unix envy &gt;
+ -------------------------------
+      \  ^__^             
+       \ (oo)\________    
+         (__)\        )\/\
+              ||----w |   
+              ||     ||   
+</code></pre>
+
+<p>Based on Tony Monroe's original Unix terminal program cowsay:</p>
+
+<p><a href="http://www.nog.net/%7Etony/warez/cowsay-3.03.tar.gz">http://www.nog.net/~tony/warez/cowsay-3.03.tar.gz</a></p>
+
+<h1>Usage</h1>
+
+<p>Posh-Cowsay exposes a single function <em>cowsay</em>. Any non-option args passed to cowsay are treated as the message:</p>
+
+<pre><code>&gt; cowsay The build is broken
+</code></pre>
+
+<p>For more examples see the built-in Powershell help:</p>
+
+<pre><code>&gt; get-help cowsay -examples
+</code></pre>
+
+<h1>Install</h1>
+
+<p>Posh-Cowsay is a single Powershell Module file with no dependencies. To install it:</p>
+
+<ol>
+<li><p>Copy <a href="https://raw.github.com/kanej/posh-cowsay/master/cowsay.psm1">cowsay.psm1</a> to your modules folder (C:\Users&lt;UserName&gt;\Documents\WindowsPowerShell\Modules&gt; on Windows 7).</p></li>
+<li>
+<p>Open a new Powershell terminal and import the module</p>
+
+<blockquote>
+<p>Import-Module cowsay</p>
+</blockquote>
+</li>
+<li><p>cowsay That was easy ... ish</p></li>
+</ol><h1>TODO</h1>
+
+<ol>
+<li>Support the modes that the original cowsay supported e.g. XX for the cows eyes.</li>
+<li>Support for arbitary whitespace (the -n option in cowsay).</li>
+<li>A way of dealing with cow files or an equivalent.</li>
+</ol><h1>License</h1>
+
+<p>Posh-Cowsay is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+
+<p>Posh-Cowsay is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License
+along with this program.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+		          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-33599251-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
