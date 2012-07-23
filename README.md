@@ -25,6 +25,14 @@ For more examples see the built-in powershell help:
 
     > get-help cowsay -examples
 
+Install
+=======
+Posh-Cowsay is a single Powershell Module file with no dependencies. To install it:
+
+1. Copy cowsay.psm1 to your modules folder.
+2. Import-Module cowsay 
+3. cowsay Have fun!
+
 License
 =======
 Posh-Cowsay is free software: you can redistribute it and/or modify
