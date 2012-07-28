@@ -129,7 +129,7 @@ function Print-Cow($eyes="oo", $tongue=" ") {
   Write-Output "      \  ^__^             "
   Write-Output "       \ ($eyes)\________    "
   Write-Output "         (__)\        )\/\"
-  Write-Output "           $tongue  ||----w |   "
+  Write-Output "          $tongue   ||----w |   "
   Write-Output "              ||     ||   "
 }
 
