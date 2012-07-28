@@ -19,6 +19,16 @@ $version = "0.1.1"
 # Max Width of the Speech Bubble
 $bubbleWidth = 40
 
+# The different modes that are supported
+$modes = @{
+  "-b"= @("==", ' ') # Borg
+  "-d"= @("XX", 'U') # Dead
+  "-g"= @('$$', ' ') # Greedy
+  "-p"= @("@@", ' ') # Paranoid
+  "-s"= @("**", 'U') # Stoned
+  "-y"= @("..", ' ') # Youthful
+}
+
 # Public
 
 <# 
@@ -75,41 +85,17 @@ function Cowsay() {
   $eyes = "oo"
   $tongue = " "
 
+
   foreach($arg in $args) {
+
     if($arg -eq "-v" -or $arg -eq "-version") {
       Print-Version
       return
     }
 
-    if($arg -eq "-b") {
-      $eyes = "=="
-      continue
-    }
-
-    if($arg -eq "-d") {
-      $eyes = 'XX'
-      $tongue = 'U'
-      continue
-    }
-
-    if($arg -eq "-g") {
-      $eyes = '$$'
-      continue
-    }
-
-    if($arg -eq "-p") {
-      $eyes = '@@'
-      continue
-    }
-
-    if($arg -eq "-s") {
-      $eyes = '**'
-      $tongue = 'U'
-      continue
-    }
-
-    if($arg -eq "-y") {
-      $eyes = '..'
+    if($modes.keys -contains $arg) {
+      $eyes   = $modes[$arg][0]
+      $tongue = $modes[$arg][1]
       continue
     }
 
