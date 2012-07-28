@@ -102,6 +102,12 @@ function Cowsay() {
       continue
     }
 
+    if($arg -eq "-s") {
+      $eyes = '**'
+      $tongue = 'U'
+      continue
+    }
+
     $messageArgs += $arg
   }
 
