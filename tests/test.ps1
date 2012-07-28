@@ -17,8 +17,8 @@ function Run-AllTests() {
 }
 
 function Run-Test($test) {
-  $message = Get-Content .\tests\$test.in
-  cowsay $message > tmp\$test.tmp
+  $command = Get-Content .\tests\$test.in
+  iex $command > tmp\$test.tmp
   $result = Compare-Object (Get-Content .\tests\$test.out) (Get-Content .\tmp\$test.tmp)
   if($result -eq $null) {
     Write-TestPassed $test
