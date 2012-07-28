@@ -97,6 +97,11 @@ function Cowsay() {
       continue
     }
 
+    if($arg -eq "-p") {
+      $eyes = '@@'
+      continue
+    }
+
     $messageArgs += $arg
   }
 
