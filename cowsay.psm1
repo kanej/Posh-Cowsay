@@ -77,6 +77,22 @@ $modes = @{
                 ||----w |
                 ||     ||
   
+.Example
+  cowsay -b Resistance is Bovine
+
+  Description
+  -----------
+  The borg mode can be enabled by passing -b option, giving a cow that
+  has joined the Collective:
+
+   ______________________
+  < Resistance is Bovine >
+   ----------------------
+        \  ^__^
+         \ (==)\________
+           (__)\        )\/\
+                ||----w |
+                ||     ||
 #>
 function Cowsay() {
   $params
