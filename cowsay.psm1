@@ -73,6 +73,7 @@ function Cowsay() {
 
   $messageArgs = @()
   $eyes = "oo"
+  $tongue = " "
 
   foreach($arg in $args) {
     if($arg -eq "-v" -or $arg -eq "-version") {
@@ -82,6 +83,12 @@ function Cowsay() {
 
     if($arg -eq "-b") {
       $eyes = "=="
+      continue
+    }
+
+    if($arg -eq "-d") {
+      $eyes = 'XX'
+      $tongue = 'U'
       continue
     }
 
@@ -98,7 +105,7 @@ function Cowsay() {
   $message = [String]::join(" ", $params)
   Print-MessageBubble($message) 
 
-  Print-Cow $eyes
+  Print-Cow $eyes $tongue
 }
 
 # Private
@@ -118,11 +125,11 @@ function Print-MessageBubble($message) {
   Write-MessageBubbleBoundaryLine -lineWidth $lineWidth -boundaryChar '-'
 }
 
-function Print-Cow($eyes="oo") {
+function Print-Cow($eyes="oo", $tongue=" ") {
   Write-Output "      \  ^__^             "
   Write-Output "       \ ($eyes)\________    "
   Write-Output "         (__)\        )\/\"
-  Write-Output "              ||----w |   "
+  Write-Output "           $tongue  ||----w |   "
   Write-Output "              ||     ||   "
 }
 
