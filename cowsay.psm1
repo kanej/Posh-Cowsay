@@ -40,6 +40,16 @@ $modes = @{
   columns, and prints the cow saying the given message on standard
   output.
 
+  Different modes can be enabled by passing the appropriate option.
+  For instance -d will enable Dead mode, were the cow shown appears
+  to be dead. The complete list of options are:
+    Borg     -b
+    Dead     -d
+    Greedy   -g
+    Paranoid -p
+    Stoned   -s
+    Youthful -y
+
   The -version or -v option will display the version of Posh-Cowsay.
 .Link
   https://github.com/kanej/posh-cowsay
