@@ -14,7 +14,7 @@
 #requires -Version 2.0
 
 # Posh-Cowsay Version
-$version = "0.1.0"
+$version = "0.1.1"
 
 # Max Width of the Speech Bubble
 $bubbleWidth = 40
@@ -71,23 +71,34 @@ $bubbleWidth = 40
 function Cowsay() {
   $params
 
+  $messageArgs = @()
+  $eyes = "oo"
+
   foreach($arg in $args) {
     if($arg -eq "-v" -or $arg -eq "-version") {
       Print-Version
       return
     }
+
+    if($arg -eq "-b") {
+      $eyes = "=="
+      continue
+    }
+
+    $messageArgs += $arg
   }
 
   $inputList = @($input)
   if ($inputList.Count -eq 0) {
-    $params = ,$args
+    $params = ,$messageArgs
   } else {
-    $params = ,$args +@($inputList)
+    $params = ,$messageArgs +@($inputList)
   }
 
   $message = [String]::join(" ", $params)
   Print-MessageBubble($message) 
-  Print-Cow
+
+  Print-Cow $eyes
 }
 
 # Private
@@ -107,9 +118,9 @@ function Print-MessageBubble($message) {
   Write-MessageBubbleBoundaryLine -lineWidth $lineWidth -boundaryChar '-'
 }
 
-function Print-Cow() {
+function Print-Cow($eyes="oo") {
   Write-Output "      \  ^__^             "
-  Write-Output "       \ (oo)\________    "
+  Write-Output "       \ ($eyes)\________    "
   Write-Output "         (__)\        )\/\"
   Write-Output "              ||----w |   "
   Write-Output "              ||     ||   "
