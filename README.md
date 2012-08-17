@@ -43,6 +43,11 @@ TODO
 2. Support for arbitary whitespace (the -n option in cowsay).
 3. A way of dealing with cow files or an equivalent.
 
+Contributors
+============
+John Kane
+Andrew Thomson
+
 License
 =======
 Posh-Cowsay is free software: you can redistribute it and/or modify
