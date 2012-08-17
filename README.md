@@ -45,8 +45,9 @@ TODO
 
 Contributors
 ============
-John Kane
-Andrew Thomson
+
+* John Kane
+* Andrew Thomson
 
 License
 =======
