@@ -167,7 +167,8 @@ function Print-Cow($eyes="oo", $tongue=" ") {
 }
 
 function Print-Version() {
- Write-Output "Posh-Cowsay version $version" 
+ Print-MessageBubble("Posh-Cowsay version $version") 
+ Print-Cow
 }
 
 # Helper Functions
