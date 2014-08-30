@@ -2,7 +2,7 @@
 #  Posh-Cowsay
 #  PowerShell version of the venerable cowsay unix program.
 #
-#  Copyright (c) 2012 John Kane
+#  Copyright (c) 2014 John Kane
 #  https://github.com/kanej/posh-cowsay
 #  
 #  Based on Tony Monroe's cowsay: 
@@ -14,7 +14,7 @@
 #requires -Version 2.0
 
 # Posh-Cowsay Version
-$version = "0.1.1"
+$version = "0.2.0"
 
 # Max Width of the Speech Bubble
 $bubbleWidth = 40
@@ -43,6 +43,7 @@ $modes = @{
   Different modes can be enabled by passing the appropriate option.
   For instance -d will enable Dead mode, were the cow shown appears
   to be dead. The complete list of options are:
+
     Borg     -b
     Dead     -d
     Greedy   -g
@@ -111,7 +112,6 @@ function Cowsay() {
   $eyes = "oo"
   $tongue = " "
 
-
   foreach($arg in $args) {
 
     if($arg -eq "-v" -or $arg -eq "-version") {
@@ -135,7 +135,8 @@ function Cowsay() {
     $params = ,$messageArgs +@($inputList)
   }
 
-  $message = [String]::join(" ", $params)
+  $message = [string[]]$params
+
   Print-MessageBubble($message) 
 
   Print-Cow $eyes $tongue
@@ -202,25 +203,26 @@ function Convert-MessageToLines($message) {
 function Split-Message($message) {
   $wordsSplitOnSpaces = $message.split(" ")
   
-  $words = @()
+  $words = [string[]]@()
 
   foreach($longWord in $wordsSplitOnSpaces) {
-    foreach($word in Split-Word($longWord)) {
+    $splitWords = Split-Word($longWord)
+    foreach($word in $splitWords) {
       if($word -ne "") {
-        $words += ,$word
+        $words+= ,[string]$word
       }
     }
   }
 
-  return ,$words
+  return ,[string[]]$words
 }
 
 function Split-Word($word) {
   if($word.length -le $bubbleWidth) {
-    return ,@($word)
+    return ,[string[]]@($word)
   }
 
-  $splits = @()
+  $splits = [string[]]@()
 
   foreach($i in (0..($word.length / $bubbleWidth))) {
     $startPoint = ($i * $bubbleWidth)
@@ -231,7 +233,7 @@ function Split-Word($word) {
     }
   }
 
-  return ,$splits
+  return ,[string[]]$splits
 }
 
 function Max-Width($lines) {
@@ -277,5 +279,6 @@ function Determine-MessageBubbleDelimiters($lineNumber, $totalNumberOfLines) {
 }
 
 # Exports
-
 Export-ModuleMember Cowsay
+Export-ModuleMember Split-Word
+Export-ModuleMember Split-Message
